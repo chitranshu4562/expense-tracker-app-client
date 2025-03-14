@@ -1,0 +1,37 @@
+/* Apply box-sizing globally */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set up the root styles */
+:root {
+  /* Responsive font scaling */
+  font-size: 16px; /* Default for desktop */
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px; /* Smaller font size for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    font-size: 12px; /* Even smaller for mobile */
+  }
+}
+
+/* Body styles */
+body {
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
