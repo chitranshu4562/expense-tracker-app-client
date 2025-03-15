@@ -7,8 +7,11 @@ import useCustomSnackbar from "../../custom-hooks/useCustomSnackbar.jsx";
 import {useMutation} from "@tanstack/react-query";
 import {userRegistration} from "../../api/usersApi.js";
 import {closeLoader, displayLoader} from "../../utils/util.js";
+import {handleAuthData} from "../../utils/auth.js";
+import {useNavigate} from "react-router-dom";
 
 export default function SignupPage() {
+    const navigate = useNavigate();
     const {successNotification, errorNotification} = useCustomSnackbar();
     const mutation = useMutation({
         mutationFn: userRegistration
@@ -17,9 +20,10 @@ export default function SignupPage() {
         displayLoader();
         try {
             const response = await mutation.mutateAsync(values)
-            console.log('Response: ', response);
+            handleAuthData(response.data);
             successNotification('User is registered successfully');
             signupForm.resetForm();
+            navigate('/');
         } catch (error) {
             console.error('Error: ', error);
             errorNotification('An error occurred')
